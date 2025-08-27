@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, Sparkles, Zap, Shield, Cloud, Users, Star, ChevronRight } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, ArrowRight, Sparkles, Shield, Zap, Github, Chrome, User, Check, ChevronRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 const GetStarted = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    firstName: '',
-    lastName: '',
     useCase: '',
     teamSize: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const steps = [
     { id: 1, title: 'Account Setup', description: 'Create your Nova account' },
@@ -26,23 +30,18 @@ const GetStarted = () => {
   const features = [
     {
       icon: Zap,
-      title: 'Instant Setup',
-      description: 'Get started in under 2 minutes'
+      title: 'Lightning Fast',
+      description: 'Access your notes instantly across all devices'
     },
     {
       icon: Shield,
-      title: 'Secure by Default',
-      description: 'End-to-end encryption from day one'
+      title: 'Secure & Private',
+      description: 'End-to-end encryption keeps your thoughts safe'
     },
     {
-      icon: Cloud,
-      title: 'Sync Everywhere',
-      description: 'Access your notes on all devices'
-    },
-    {
-      icon: Users,
-      title: 'Team Ready',
-      description: 'Collaborate with your team instantly'
+      icon: Sparkles,
+      title: 'AI-Powered',
+      description: 'Smart suggestions that understand your context'
     }
   ];
 
@@ -52,21 +51,24 @@ const GetStarted = () => {
       role: 'Product Manager',
       company: 'TechCorp',
       content: 'Nova transformed how our team captures and shares ideas. The AI suggestions are incredibly helpful.',
-      rating: 5
+      rating: 5,
+      initials: 'SC'
     },
     {
       name: 'Michael Rodriguez',
       role: 'Research Scientist',
       company: 'University Lab',
       content: 'The backlink system helped me connect research papers in ways I never thought possible.',
-      rating: 5
+      rating: 5,
+      initials: 'MR'
     },
     {
       name: 'Emily Johnson',
       role: 'Freelance Writer',
       company: 'Independent',
       content: 'Finally, a note-taking app that understands how I think. The AI writing assistant is a game-changer.',
-      rating: 5
+      rating: 5,
+      initials: 'EJ'
     }
   ];
 
@@ -90,97 +92,195 @@ const GetStarted = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate account creation process
+    setTimeout(() => {
+      setIsLoading(false);
+      if (currentStep < steps.length) {
+        handleNextStep();
+      }
+    }, 2000);
+  };
+
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold text-white mb-2">Create Your Account</h2>
-              <p className="text-zinc-400">Join thousands of users who trust Nova with their ideas</p>
-            </div>
-            
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">First Name</label>
-                <Input
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  placeholder="John"
-                  className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500"
-                />
+                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  First Name
+                </label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                  <Input
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your first name"
+                    className="pl-10 focus:ring-2 focus:ring-violet-400/50"
+                    style={{
+                      backgroundColor: 'var(--button-secondary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)'
+                    }}
+                    required
+                  />
+                </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">Last Name</label>
+                <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                  Last Name
+                </label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                  <Input
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    placeholder="Enter your last name"
+                    className="pl-10 focus:ring-2 focus:ring-violet-400/50"
+                    style={{
+                      backgroundColor: 'var(--button-secondary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)'
+                    }}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
                 <Input
-                  name="lastName"
-                  value={formData.lastName}
+                  name="email"
+                  type="email"
+                  value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Doe"
-                  className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500"
+                  placeholder="Enter your email"
+                  className="pl-10 focus:ring-2 focus:ring-violet-400/50"
+                  style={{
+                    backgroundColor: 'var(--button-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-primary)'
+                  }}
+                  required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Email Address</label>
-              <Input
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="john@example.com"
-                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500"
-              />
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                <Input
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="Create a strong password"
+                  className="pl-10 pr-10 focus:ring-2 focus:ring-violet-400/50"
+                  style={{
+                    backgroundColor: 'var(--button-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-primary)'
+                  }}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-400 hover:text-white"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Password</label>
-              <Input
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="Create a strong password"
-                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500"
-              />
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
+                <Input
+                  name="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  placeholder="Confirm your password"
+                  className="pl-10 pr-10 focus:ring-2 focus:ring-violet-400/50"
+                  style={{
+                    backgroundColor: 'var(--button-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-primary)'
+                  }}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-zinc-400 hover:text-white"
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Confirm Password</label>
-              <Input
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                placeholder="Confirm your password"
-                className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500"
-              />
-            </div>
-
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
+            <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-muted)' }}>
               <Check className="w-4 h-4 text-emerald-400" />
               <span>By creating an account, you agree to our Terms of Service and Privacy Policy</span>
             </div>
-          </div>
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full btn-primary py-3 text-lg font-semibold"
+            >
+              {isLoading ? (
+                <div className="flex items-center">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                  Creating Account...
+                </div>
+              ) : (
+                <>
+                  Create Account
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </Button>
+          </form>
         );
 
       case 2:
         return (
-          <div className="space-y-6">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-semibold text-white mb-2">Tell Us About Yourself</h2>
-              <p className="text-zinc-400">Help us personalize your Nova experience</p>
-            </div>
-
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">What's your primary use case?</label>
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                What's your primary use case?
+              </label>
               <select
                 name="useCase"
                 value={formData.useCase}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-400/50"
+                className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400/50"
+                style={{
+                  backgroundColor: 'var(--button-secondary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid'
+                }}
+                required
               >
                 <option value="">Select your use case</option>
                 <option value="personal">Personal note-taking</option>
@@ -193,12 +293,20 @@ const GetStarted = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">Team size (optional)</label>
+              <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-secondary)' }}>
+                Team size (optional)
+              </label>
               <select
                 name="teamSize"
                 value={formData.teamSize}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-violet-400/50"
+                className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400/50"
+                style={{
+                  backgroundColor: 'var(--button-secondary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid'
+                }}
               >
                 <option value="">Select team size</option>
                 <option value="individual">Just me</option>
@@ -208,8 +316,11 @@ const GetStarted = () => {
               </select>
             </div>
 
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <h3 className="text-lg font-semibold text-white mb-4">What you'll get:</h3>
+            <div className="rounded-2xl p-6 border" style={{
+              backgroundColor: 'var(--card-bg)',
+              borderColor: 'var(--card-border)'
+            }}>
+              <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>What you'll get:</h3>
               <div className="space-y-3">
                 {[
                   'Unlimited notes and documents',
@@ -221,12 +332,30 @@ const GetStarted = () => {
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <Check className="w-4 h-4 text-emerald-400" />
-                    <span className="text-zinc-300">{feature}</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>{feature}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full btn-primary py-3 text-lg font-semibold"
+            >
+              {isLoading ? (
+                <div className="flex items-center">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                  Setting up...
+                </div>
+              ) : (
+                <>
+                  Complete Setup
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </Button>
+          </form>
         );
 
       case 3:
@@ -236,32 +365,33 @@ const GetStarted = () => {
               <Check className="w-10 h-10 text-white" />
             </div>
             
-            <h2 className="text-3xl font-semibold text-white mb-4">Welcome to Nova!</h2>
-            <p className="text-zinc-300 text-lg max-w-md mx-auto">
+            <h2 className="text-3xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Welcome to Nova!</h2>
+            <p className="text-lg max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
               Your account has been created successfully. You're ready to start capturing and organizing your ideas.
             </p>
 
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10 max-w-md mx-auto">
-              <h3 className="text-lg font-semibold text-white mb-4">Next Steps:</h3>
+            <div className="rounded-2xl p-6 border max-w-md mx-auto" style={{
+              backgroundColor: 'var(--card-bg)',
+              borderColor: 'var(--card-border)'
+            }}>
+              <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Next Steps:</h3>
               <div className="space-y-3 text-left">
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-violet-500 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
-                  <span className="text-zinc-300">Download the mobile app</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Download the mobile app</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-violet-500 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
-                  <span className="text-zinc-300">Create your first note</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Create your first note</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-violet-500 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-                  <span className="text-zinc-300">Explore AI features</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>Explore AI features</span>
                 </div>
               </div>
             </div>
 
-            <Button
-              className="bg-gradient-to-r from-violet-500 to-indigo-600 hover:from-violet-600 hover:to-indigo-700 text-white px-8 py-3 text-lg"
-            >
+            <Button className="btn-primary px-8 py-3 text-lg">
               Launch Nova
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
@@ -274,166 +404,206 @@ const GetStarted = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative z-10 pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-6 px-4 py-2 text-violet-400 border-violet-400/20 bg-violet-400/10">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Get Started
-            </Badge>
-            
-            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
-              Start Your Journey with{' '}
-              <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                Nova
+    <div className="min-h-screen flex">
+      {/* Left Side - Signup Form */}
+      <div className="flex-1 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-[0_0_0_2px_rgba(255,255,255,0.06)_inset]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M12 6v12"></path>
+                  <path d="M17.196 9 6.804 15"></path>
+                  <path d="m6.804 9 10.392 6"></path>
+                </svg>
               </span>
-            </h1>
+              <span className="text-2xl font-semibold" style={{ color: 'var(--text-primary)' }}>Nova</span>
+            </div>
             
-            <p className="text-xl text-zinc-300 leading-relaxed mb-12 max-w-3xl mx-auto">
-              Join thousands of creators, researchers, and professionals who have transformed their note-taking with Nova's AI-powered platform.
+            <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              {currentStep === 1 && "Create your account"}
+              {currentStep === 2 && "Tell us about yourself"}
+              {currentStep === 3 && "Welcome to Nova!"}
+            </h1>
+            <p style={{ color: 'var(--text-muted)' }}>
+              {currentStep === 1 && "Join thousands of users who trust Nova with their ideas"}
+              {currentStep === 2 && "Help us personalize your Nova experience"}
+              {currentStep === 3 && "You're all set to start your journey"}
             </p>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            {features.map((feature, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 backdrop-blur">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <feature.icon className="w-6 h-6 text-white" />
+          {/* Progress Steps */}
+          {currentStep < 3 && (
+            <div className="flex items-center justify-between mb-8">
+              {steps.map((step, index) => (
+                <div key={step.id} className="flex items-center">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                    currentStep >= step.id 
+                      ? 'bg-violet-500 text-white' 
+                      : 'text-zinc-400'
+                  }`} style={{
+                    backgroundColor: currentStep >= step.id ? '#8b5cf6' : 'var(--button-secondary)'
+                  }}>
+                    {currentStep > step.id ? <Check className="w-4 h-4" /> : step.id}
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-zinc-400 text-sm">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Signup Form */}
-      <section className="relative z-10 pb-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Form */}
-            <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10">
-              {/* Progress Steps */}
-              <div className="flex items-center justify-between mb-8">
-                {steps.map((step, index) => (
-                  <div key={step.id} className="flex items-center">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                      currentStep >= step.id 
-                        ? 'bg-violet-500 text-white' 
-                        : 'bg-white/10 text-zinc-400'
-                    }`}>
-                      {currentStep > step.id ? <Check className="w-4 h-4" /> : step.id}
-                    </div>
-                    {index < steps.length - 1 && (
-                      <div className={`w-12 h-0.5 mx-2 ${
-                        currentStep > step.id ? 'bg-violet-500' : 'bg-white/10'
-                      }`} />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Step Content */}
-              {renderStepContent()}
-
-              {/* Navigation Buttons */}
-              <div className="flex justify-between mt-8">
-                <Button
-                  variant="outline"
-                  onClick={handlePrevStep}
-                  disabled={currentStep === 1}
-                  className="border-white/10 text-zinc-300 hover:bg-white/5"
-                >
-                  Previous
-                </Button>
-                
-                {currentStep < steps.length ? (
-                  <Button
-                    onClick={handleNextStep}
-                    className="bg-gradient-to-r from-violet-500 to-indigo-600 hover:from-violet-600 hover:to-indigo-700 text-white"
-                  >
-                    {currentStep === steps.length - 1 ? 'Complete Setup' : 'Continue'}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button
-                    className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white"
-                  >
-                    Get Started
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            {/* Testimonials */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-white mb-6">What our users say</h3>
-              
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-white/5 border-white/10 backdrop-blur">
-                  <CardContent className="p-6">
-                    <div className="flex items-center gap-1 mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <p className="text-zinc-300 mb-4 italic">"{testimonial.content}"</p>
-                    <div>
-                      <p className="text-white font-medium">{testimonial.name}</p>
-                      <p className="text-zinc-400 text-sm">{testimonial.role} at {testimonial.company}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                  {index < steps.length - 1 && (
+                    <div className={`w-12 h-0.5 mx-2 ${
+                      currentStep > step.id ? 'bg-violet-500' : ''
+                    }`} style={{
+                      backgroundColor: currentStep > step.id ? '#8b5cf6' : 'var(--border-color)'
+                    }} />
+                  )}
+                </div>
               ))}
             </div>
-          </div>
+          )}
+
+          {/* Social Login (only on step 1) */}
+          {currentStep === 1 && (
+            <>
+              <div className="space-y-3 mb-6">
+                <Button
+                  variant="outline"
+                  className="w-full btn-secondary"
+                >
+                  <Chrome className="w-4 h-4 mr-2" />
+                  Continue with Google
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full btn-secondary"
+                >
+                  <Github className="w-4 h-4 mr-2" />
+                  Continue with GitHub
+                </Button>
+              </div>
+
+              {/* Divider */}
+              <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t" style={{ borderColor: 'var(--border-color)' }}></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2" style={{ 
+                    backgroundColor: 'var(--bg-primary)', 
+                    color: 'var(--text-muted)' 
+                  }}>Or continue with email</span>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Step Content */}
+          {renderStepContent()}
+
+          {/* Navigation Buttons (only for steps 1-2) */}
+          {currentStep < 3 && currentStep > 1 && (
+            <div className="flex justify-between mt-8">
+              <Button
+                variant="outline"
+                onClick={handlePrevStep}
+                className="btn-secondary"
+              >
+                Previous
+              </Button>
+            </div>
+          )}
+
+          {/* Sign In Link */}
+          {currentStep === 1 && (
+            <div className="text-center mt-6">
+              <p style={{ color: 'var(--text-muted)' }}>
+                Already have an account?{' '}
+                <Link to="/login" className="text-violet-400 hover:text-violet-300 font-medium">
+                  Sign in
+                </Link>
+              </p>
+            </div>
+          )}
+
+          {/* Security Notice */}
+          {currentStep === 1 && (
+            <div className="mt-8 p-4 rounded-lg border" style={{
+              backgroundColor: 'var(--card-bg)',
+              borderColor: 'var(--card-border)'
+            }}>
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Secure Signup</span>
+              </div>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                Your account is protected with enterprise-grade security and end-to-end encryption.
+              </p>
+            </div>
+          )}
         </div>
-      </section>
+      </div>
 
-      {/* FAQ Section */}
-      <section className="relative z-10 py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold text-white mb-4">Frequently Asked Questions</h2>
-            <p className="text-zinc-400">Everything you need to know to get started</p>
+      {/* Right Side - Features & Branding */}
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-violet-500/10 to-indigo-600/10 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-violet-500/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 flex flex-col justify-center p-12 max-w-lg mx-auto">
+          {/* Header */}
+          <div className="mb-12">
+            <Badge variant="outline" className="mb-4 px-3 py-1 text-violet-400 border-violet-400/20 bg-violet-400/10">
+              <Sparkles className="w-3 h-3 mr-1" />
+              Join 50,000+ users
+            </Badge>
+            
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Transform your note-taking experience
+            </h2>
+            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+              Join thousands of creators, researchers, and professionals who have revolutionized their productivity with Nova's AI-powered platform.
+            </p>
           </div>
 
-          <div className="space-y-4">
-            {[
-              {
-                question: "Is Nova really free to start?",
-                answer: "Yes! Nova offers a generous free plan that includes up to 1,000 notes, basic AI features, and cross-platform sync. You can upgrade anytime as your needs grow."
-              },
-              {
-                question: "How secure is my data?",
-                answer: "Your data is protected with end-to-end encryption. We use zero-knowledge architecture, which means we can't read your notes even if we wanted to."
-              },
-              {
-                question: "Can I import my existing notes?",
-                answer: "Absolutely! Nova supports importing from most popular note-taking apps including Notion, Evernote, Obsidian, and more."
-              },
-              {
-                question: "Do I need to install anything?",
-                answer: "Nova works in your browser, but we also offer native apps for better performance and offline access on desktop and mobile."
-              }
-            ].map((faq, index) => (
-              <Card key={index} className="bg-white/5 border-white/10 backdrop-blur">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-3">{faq.question}</h3>
-                  <p className="text-zinc-300">{faq.answer}</p>
-                </CardContent>
-              </Card>
+          {/* Features */}
+          <div className="space-y-6">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <feature.icon className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>{feature.title}</h3>
+                  <p style={{ color: 'var(--text-muted)' }}>{feature.description}</p>
+                </div>
+              </div>
             ))}
           </div>
+
+          {/* Testimonial */}
+          <div className="mt-12 p-6 rounded-2xl border backdrop-blur" style={{
+            backgroundColor: 'var(--card-bg)',
+            borderColor: 'var(--card-border)'
+          }}>
+            <div className="flex items-center gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <p className="mb-4 italic" style={{ color: 'var(--text-secondary)' }}>
+              "Nova has completely transformed how I organize my research. The AI suggestions are incredibly helpful, and the cross-platform sync means I never lose an idea."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center">
+                <span className="text-white font-medium text-sm">DR</span>
+              </div>
+              <div>
+                <p className="font-medium" style={{ color: 'var(--text-primary)' }}>Dr. Rachel Kim</p>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Research Scientist, MIT</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

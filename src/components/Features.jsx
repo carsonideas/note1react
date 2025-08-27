@@ -20,7 +20,7 @@ import {
 
 const Features = () => {
   return (
-    <section className="relative z-10 bg-gradient-to-b from-[#000000] to-[#0A0A11]">
+    <section className="relative z-10 bg-gradient-to-b from-[black] to-[indigo]">
       <div className="max-w-6xl sm:px-6 lg:px-8 mr-auto ml-auto pt-20 pr-4 pb-20 pl-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {/* Security Feature */}

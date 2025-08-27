@@ -29,7 +29,7 @@ const Hero = () => {
 
           <div className="flex gap-3 mt-8 mb-0 pb-[60px] items-center">
             <a 
-              href="#" 
+              href="login" 
               className="inline-flex items-center gap-2 shadow-violet-900/25 text-sm font-semibold text-white bg-gradient-to-br from-violet-500 to-indigo-600 rounded-full pt-2.5 pr-5 pb-2.5 pl-5 shadow-lg transform-gpu transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-6px_rgba(139,92,246,0.4)] hover:scale-[1.02] active:scale-[0.98] active:duration-75"
               style={{transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), scale 0.3s cubic-bezier(0.4, 0, 0.2, 1)'}}
             >
@@ -37,11 +37,11 @@ const Hero = () => {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
             </a>
             <a 
-              href="#" 
+              href="get-started" 
               className="inline-flex items-center gap-2 hover:bg-white/5 text-sm font-medium text-zinc-200 border-white/10 border rounded-full pt-2.5 pr-5 pb-2.5 pl-5 backdrop-blur-lg"
             >
               <Play className="h-4 w-4" />
-              Watch demo
+              Get Started
             </a>
           </div>
           <div className="flex items-center gap-2">

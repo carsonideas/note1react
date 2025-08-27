@@ -116,60 +116,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-6xl mx-auto text-center"
-        >
-          <Badge variant="outline" className="mb-6 px-4 py-2 text-violet-400 border-violet-400/20 bg-violet-400/10">
-            <Headphones className="w-4 h-4 mr-2" />
-            Get in Touch
-          </Badge>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
-            We're Here to{' '}
-            <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-              Help You Succeed
-            </span>
-          </h1>
-          
-          <p className="text-xl text-zinc-300 leading-relaxed mb-12 max-w-3xl mx-auto">
-            Have questions about Nova? Need help getting started? Our team of experts is ready 
-            to assist you every step of the way.
-          </p>
-
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { value: "< 2min", label: "Response Time", icon: Clock },
-              { value: "24/7", label: "Support Available", icon: Headphones },
-              { value: "99%", label: "Satisfaction Rate", icon: CheckCircle },
-              { value: "50+", label: "Countries Served", icon: Globe }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-zinc-400 font-medium text-sm">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+      
 
       {/* Contact Methods */}
       <section className="py-20 px-8 bg-gradient-to-br from-white/5 to-violet-500/5">
@@ -181,6 +128,10 @@ const Contact = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <Badge variant="outline" className="mb-6 px-4 py-2 text-violet-400 border-violet-400/20 bg-violet-400/10">
+            <Headphones className="w-4 h-4 mr-2" />
+            Get in Touch
+          </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Choose Your{' '}
               <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">

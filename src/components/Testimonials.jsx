@@ -7,7 +7,7 @@ const Testimonials = () => {
         <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-center">Loved by educators</h2>
         <p className="mt-2 text-center text-sm text-zinc-600 dark:text-zinc-400">Real results from real teams.</p>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-          <figure className="rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <figure className="rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <div className="flex items-center gap-2 text-amber-500">
               <span aria-hidden="true">★★★★★</span>
               <span className="sr-only">5 out of 5 stars</span>
@@ -23,7 +23,7 @@ const Testimonials = () => {
               </div>
             </figcaption>
           </figure>
-          <figure className="rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <figure className="rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <div className="flex items-center gap-2 text-amber-500">
               <span aria-hidden="true">★★★★★</span>
               <span className="sr-only">5 out of 5 stars</span>
@@ -39,7 +39,7 @@ const Testimonials = () => {
               </div>
             </figcaption>
           </figure>
-          <figure className="rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <figure className="rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <div className="flex items-center gap-2 text-amber-500">
               <span aria-hidden="true">★★★★★</span>
               <span className="sr-only">5 out of 5 stars</span>

@@ -15,17 +15,17 @@ const HowItWorks = () => {
             <h3 className="text-lg font-semibold tracking-tight">Import</h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Upload files or pull from your LMS. Set your rubric.</p>
           </div>
-          <div className="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <div className="relative rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <span className="absolute -top-3 -left-3 h-8 w-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white inline-flex items-center justify-center text-sm font-semibold">2</span>
             <h3 className="text-lg font-semibold tracking-tight">Assist</h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">AI suggests criterion scores and highlights evidence.</p>
           </div>
-          <div className="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <div className="relative rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <span className="absolute -top-3 -left-3 h-8 w-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white inline-flex items-center justify-center text-sm font-semibold">3</span>
             <h3 className="text-lg font-semibold tracking-tight">Review</h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">You approve, edit, or override with one click.</p>
           </div>
-          <div className="relative rounded-2xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-white/5 p-5">
+          <div className="relative rounded-2xl border border-zinc-200 dark:border-blue/10 bg-blue dark:bg-white/5 p-5">
             <span className="absolute -top-3 -left-3 h-8 w-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white inline-flex items-center justify-center text-sm font-semibold">4</span>
             <h3 className="text-lg font-semibold tracking-tight">Sync</h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Publish feedback and sync grades back to your LMS.</p>

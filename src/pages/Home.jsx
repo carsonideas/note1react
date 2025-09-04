@@ -12,12 +12,14 @@ import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import CTA from '../components/CTA';
 import FinalCTA from '../components/FinalCTA';
+import Homefeaturethink from '../components/Homefeaturethink';
 
 const Home = () => {
   return (
     <>
       <Hero />
       <Features />
+      <Homefeaturethink/>
       <HowItWorks />
       <Testimonials />
       <FAQ />

@@ -230,7 +230,7 @@ const Features = () => {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-10">
+        {/* <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-10">
           <article className="relative overflow-hidden ring-1 ring-white/10 bg-white/5 rounded-3xl p-4 shadow-sm backdrop-blur">
             <div className="flex items-start justify-between">
               <span className="inline-flex items-center rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-medium text-slate-200 font-sans">New</span>
@@ -272,7 +272,7 @@ const Features = () => {
               <img alt="minimal" className="aspect-[3/4] w-full object-cover" src="https://cdn.midjourney.com/abdd2d48-3bf3-4630-a8c3-3e28a7f6b4ff/0_0.png?w=800&q=80" />
             </div>
           </article>
-        </div>
+        </div> */}
       </div>
       
     </section>

@@ -100,7 +100,7 @@ const Pricing = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative z-10 hero-section pt-32 pb-16">
+      <section className="relative z-10 hero-section pt-0 pb-16">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="gradient-bg"></div>
           <div className="text-center">
@@ -138,7 +138,7 @@ const Pricing = () => {
       </section>
 
       {/* Pricing Cards */}
-      <section className="relative z-10 pb-20">
+      <section className="relative z-10 pb-10 pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {plans.map((plan, index) => (
@@ -151,8 +151,8 @@ const Pricing = () => {
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="px-3 py-1 rounded-full text-xs font-medium text-white bg-gradient-to-r from-violet-500 to-indigo-600">
+                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 border-popular">
+                    <span className="px-3 py-1 rounded-full text-xs font-medium text-white from-violet-500 to-indigo-600">
                       Most Popular
                     </span>
                   </div>

@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import GetStarted from './pages/GetStarted';
 import Login from './pages/Login';
+import Homefeaturethink from './components/Homefeaturethink';
 
 // Background glow component
 const BackgroundGlow = () => (

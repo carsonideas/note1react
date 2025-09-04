@@ -1480,13 +1480,7 @@
 } */
 
 /* Background fixes for light theme*/
-.light .bg-white\/5,
-.light .bg-white\/10 
-{
-  background-color: rgb(248, 149, 179) !important;
 
-  
-}
 /* 
 .light .border-white\/10,
 .light .border-white\/5 {
@@ -1767,4 +1761,12 @@ border: 1px solid purple;
 border-radius: 20px;
 background-color: purple;
 
+}
+
+.light .bg-white\/5,
+.light .bg-white\/10 
+{
+  background-color: rgba(175, 0, 223, 0.209) !important;
+
+  
 }

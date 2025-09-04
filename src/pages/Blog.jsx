@@ -605,7 +605,7 @@ function Blog() {
       </section>
 
       {/* Blog Statistics Section */}
-      <section className="relative z-10 py-20">
+      {/* <section className="relative z-10 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="stat-card p-8 rounded-2xl bg-gradient-to-br from-violet-500/10 to-indigo-600/10 border border-violet-500/20 backdrop-blur text-center">
@@ -633,7 +633,7 @@ function Blog() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Newsletter Signup */}
       <section className="relative z-10 py-20">

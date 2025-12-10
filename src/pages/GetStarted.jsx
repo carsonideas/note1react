@@ -395,10 +395,15 @@ const GetStarted = () => {
               </div>
             </div>
 
-            <Button className="btn-primary px-8 py-3 text-lg">
-              Launch Assesium
-              <ArrowRight className="w-5 h-5 ml-2" />
+            <Button 
+                  className="btn-primary px-8 py-3 text-lg"
+                  onClick={() => window.location.href = 'https://assesium.vercel.app'}
+                  >
+                    Launch Assesium
+                  <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
+
+
           </div>
         );
 
